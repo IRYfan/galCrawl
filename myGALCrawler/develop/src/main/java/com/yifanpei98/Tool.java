@@ -1,4 +1,4 @@
-package com;
+package com.yifanpei98;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,7 +26,7 @@ import org.xml.sax.SAXException;
 
 public class Tool {
     private DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-    private static final Logger logger = LogManager.getLogger("tool");
+    private static final Logger logger = LogManager.getLogger(Tool.class);
 
     public void writeXML(String fullFilePath, String galTitle, String currTimestamp)
             throws ParserConfigurationException, TransformerException {

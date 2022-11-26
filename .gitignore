@@ -1,4 +1,4 @@
 myGALCrawler/records/
-myGALCrawler/.apt_generated/
-myGALCrawler/.apt_generated_tests/
-myGALCrawler/target
+myGALCrawler/develop/.apt_generated/
+myGALCrawler/develop/.apt_generated_tests/
+myGALCrawler/develop/target/

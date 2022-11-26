@@ -16,8 +16,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import com.Tool;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
@@ -25,7 +23,7 @@ public class App {
     private static String URL = "https://www.zfshe1.com/game/pc/page/1";
     private static String GAL_TAG_NAME = "article";
     private static String PATH_GAL_RECORD = "myGALCrawler/records/";
-    private static final Logger logger = LogManager.getLogger("App");
+    private static final Logger logger = LogManager.getLogger(App.class);
     private static String FILE_NAME = "gal_record.xml";
 
     public static void main(String[] args) throws IOException, ParserConfigurationException, TransformerException {
@@ -47,19 +45,13 @@ public class App {
             logger.info("No existed gal records detected, storing the current gal item...");
             tool.writeXML(PATH_GAL_RECORD + FILE_NAME, galTitle, formattedDate);
         } else {
-            logger.info("Existed gal records detected, proceeding records comparison...");
+            logger.info("Existed gal records detected, proceeding comparison...");
             HashMap<String, String> xmlData = (HashMap<String, String>) tool.readXML(PATH_GAL_RECORD + FILE_NAME);
-            Timestamp recordTime = Timestamp.valueOf(xmlData.get("time"));
-            Timestamp currTime = Timestamp.valueOf(formattedDate);
-            if (currTime.compareTo(recordTime) > 0) {
-                // currenttime is the latest one
-                if (!xmlData.get("title").equals(galTitle)) {
-                    logger.info("new gal has come out!");
-                } else {
-                    logger.info("no new gal comes out yet...");
-                }
+            // currenttime is the latest one
+            if (!xmlData.get("title").equals(galTitle)) {
+                logger.info("new gal has come out!");
             } else {
-                logger.info("you have finished the resources detection, please try again later");
+                logger.info("no new gal comes out yet...");
             }
         }
     }
