@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -19,6 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -53,17 +55,25 @@ public class Tool {
         }
     }
 
-    public HashMap<String, String> readXML(String fullFilePath)
+    public Map<String, String> readXML(String fullFilePath)
             throws ParserConfigurationException, TransformerException {
         DocumentBuilder dBuilder = docFactory.newDocumentBuilder();
+        Map<String, String> xmlRead = new HashMap<>();
         try {
             docFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             Document doc = dBuilder.parse(new File(fullFilePath));
             doc.getDocumentElement().normalize();
-            NodeList list = doc.getElementsByTagName("staff");
+            NodeList rootNodes = doc.getElementsByTagName("GalRecord");
+            for (int temp = 0; temp < rootNodes.getLength(); temp++) {
+                Node node = rootNodes.item(temp);
+                Element element = (Element) node;
+                xmlRead.put("time", element.getElementsByTagName("time").item(0).getTextContent());
+                xmlRead.put("title", element.getElementsByTagName("title").item(0).getTextContent());
+            }
+
         } catch (ParserConfigurationException | SAXException | IOException e) {
             logger.error("error in reading XML file... ", e);
         }
-        return null;
+        return xmlRead;
     }
 }

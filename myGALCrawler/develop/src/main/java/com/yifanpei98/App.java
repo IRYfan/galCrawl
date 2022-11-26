@@ -48,7 +48,7 @@ public class App {
             tool.writeXML(PATH_GAL_RECORD + FILE_NAME, galTitle, formattedDate);
         } else {
             logger.info("Existed gal records detected, proceeding records comparison...");
-            HashMap<String, String> xmlData = tool.readXML(PATH_GAL_RECORD + FILE_NAME);
+            HashMap<String, String> xmlData = (HashMap<String, String>) tool.readXML(PATH_GAL_RECORD + FILE_NAME);
             Timestamp recordTime = Timestamp.valueOf(xmlData.get("time"));
             Timestamp currTime = Timestamp.valueOf(formattedDate);
             if (currTime.compareTo(recordTime) > 0) {
