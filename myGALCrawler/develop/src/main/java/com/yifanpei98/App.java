@@ -2,7 +2,6 @@ package com.yifanpei98;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
