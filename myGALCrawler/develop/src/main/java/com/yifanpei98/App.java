@@ -22,7 +22,7 @@ import okhttp3.Request;
 public class App {
     private static String URL = "https://www.zfshe1.com/game/pc/page/1";
     private static String GAL_TAG_NAME = "article";
-    private static String PATH_GAL_RECORD = "myGALCrawler/records/";
+    private static String PATH_GAL_RECORD = "galCrawl/myGALCrawler/records/";
     private static final Logger logger = LogManager.getLogger(App.class);
     private static String FILE_NAME = "gal_record.xml";
 
@@ -50,6 +50,7 @@ public class App {
             // currenttime is the latest one
             if (!xmlData.get("title").equals(galTitle)) {
                 logger.info("new gal has come out!");
+                tool.writeXML(PATH_GAL_RECORD + FILE_NAME, galTitle, formattedDate);
             } else {
                 logger.info("no new gal comes out yet...");
             }
